@@ -2,7 +2,7 @@ const cheerio = require('cheerio');
 const url = require('url');
 const fs = require('fs');
 const colors = require('colors');
-const helper = require('./Helper');
+const helper = require('./helper');
 const got = require('got');
 
 function down_zippydamn(urls) {

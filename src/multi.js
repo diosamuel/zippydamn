@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const url = require('url');
 const fs = require('fs');
 const colors = require('colors');
-const helper = require('./Helper');
+const helper = require('./helper');
 
 function multi_zippydamn(pathURLFile, pathSavedFile = 'result.txt') {
 

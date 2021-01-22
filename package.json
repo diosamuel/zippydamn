@@ -1,12 +1,17 @@
 {
   "name": "zippydamn",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.4",
+  "description": "ZippyDamn! is a ZippyShare Unofficial CLI (downloader & search) for nodejs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test"
   },
-  "keywords": [],
+  "keywords": [
+    "zippyshare",
+    "downloader",
+    "cli",
+    "nodejs"
+  ],
   "author": "diosamuel",
   "license": "ISC",
   "bin": {
@@ -22,5 +27,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/diosamuel/zippydown"
-}
+  }
 }

@@ -1,8 +1,7 @@
+# ZippyDamn!
 ![ZippyDamn](./logo.jpg)
 
-# ZippyDamn!
-
-_ZippyDamn!_ is a ZippyShare Unofficial CLI (downloader & search) for nodejs
+ZippyDamn! is a ZippyShare Unofficial CLI (downloader & search) for nodejs
 
 ## Installation
 

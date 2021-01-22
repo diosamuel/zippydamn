@@ -3,9 +3,9 @@ const { Command } = require('commander');
 const program = new Command();
 
 const ZippyDamn = {
-  down:require('./down'),
-  multi:require('./multi'),
-  search:require('./search')
+  down:require('./src/down'),
+  multi:require('./src/multi'),
+  search:require('./src/search')
 }
 
 console.log(`
@@ -28,7 +28,7 @@ program.addHelpText('after', `
 Example command:
   $ zippydamn -s song
   $ zippydamn -d https://www19.zippyshare.com/v/lKeHaNxX/file.html
-  $ zippydamn -m file.txt result.txt
+  $ zippydamn -m list.txt result.txt
   `);
 
 program.parse(process.argv);

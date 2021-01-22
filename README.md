@@ -8,7 +8,7 @@ ZippyDamn! is a ZippyShare Unofficial CLI (downloader & search) for nodejs
 Use the package manager npm to install _ZippyDamn!_ CLI
 
 ```bash
-npm install zippydamn -g
+npm install -g zippydamn 
 ```
 
 ## Usage
@@ -42,4 +42,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+This repository is under [MIT](https://choosealicense.com/licenses/mit/) license.

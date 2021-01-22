@@ -1,13 +1,13 @@
 {
   "name": "zippydamn",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "diosamuel",
   "license": "ISC",
   "bin": {
     "zippydamn": "./index.js"
@@ -18,5 +18,9 @@
     "commander": "^7.0.0",
     "got": "^11.8.1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diosamuel/zippydown"
+}
 }

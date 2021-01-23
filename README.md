@@ -1,14 +1,26 @@
-# ZippyDamn!
-![ZippyDamn](./logo.jpg)
+<h1 align="center"> ZippyDamn!</h1>
 
-ZippyDamn! is a ZippyShare Unofficial CLI (downloader & search) for nodejs
+<h2 align="center">
+ZippyDamn! is a ZippyShare Unofficial CLI (downloader & search) for nodejs</h2>
 
+<div align="center">
+    <img src="https://img.shields.io/github/forks/diosamuel/zippydamn?style=for-the-badge">
+    <img src="https://img.shields.io/github/stars/diosamuel/zippydamn?style=for-the-badge">
+    <img src="https://img.shields.io/github/license/diosamuel/zippydamn?style=for-the-badge">
+</div>
+
+<div align="center">
+<img src="./logo.jpg">
+</div>
+
+
+![](https://nodei.co/npm/zippydamn.png)
 ## Installation
 
 Use the package manager npm to install _ZippyDamn!_ CLI
 
 ```bash
-npm install -g zippydamn 
+npm install zippydamn -g
 ```
 
 ## Usage
@@ -42,4 +54,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
-This repository is under [MIT](https://choosealicense.com/licenses/mit/) license.
+[MIT](https://choosealicense.com/licenses/mit/)

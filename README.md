@@ -13,8 +13,6 @@ ZippyDamn! is a ZippyShare Unofficial CLI (downloader & search) for nodejs</h2>
 <img src="./logo.jpg">
 </div>
 
-
-![](https://nodei.co/npm/zippydamn.png)
 ## Installation
 
 Use the package manager npm to install _ZippyDamn!_ CLI

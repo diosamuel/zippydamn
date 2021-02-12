@@ -5,10 +5,9 @@ const colors = require('colors');
 const helper = require('./helper');
 const got = require('got');
 
-function down_zippydamn(urls) {
+function down_zippydamn(urls,cb) {
 
     if (helper.isValidUrl(urls) && helper.isZippyShareUrl(urls)) {
-    	console.log('url : '.brightCyan + urls)
         startScrape(urls)
     } else {
         console.log("======== FAILED =======".bgRed)
@@ -39,8 +38,7 @@ function down_zippydamn(urls) {
                             let divider = tagScript.split(';')[0]
                             let decrypt = divider.split("document.getElementById('dlbutton').href = ")[1]
                             let result = `${url.parse(urls).hostname}${eval(decrypt)}`
-                            console.log('\ncopy & paste it to browser'.green)
-                            console.log(`${result}`.brightCyan)
+                            cb(result)
                         }
                     })
                 } else {

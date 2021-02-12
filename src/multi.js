@@ -8,8 +8,8 @@ const helper = require('./helper');
 function multi_zippydamn(pathURLFile, pathSavedFile = 'result.txt') {
 
     if (helper.isExistFile(pathURLFile) && helper.isEmptyFile(pathURLFile)) {
-        console.log('source file : '.green + pathURLFile)
-        console.log('save to : '.green + pathSavedFile)
+        console.log('[SOURCE] : '.green + pathURLFile)
+        console.log('[SAVE TO] : '.green + pathSavedFile)
         q = fs.readFileSync(pathURLFile, 'utf8').split(/\n/);
     } else {
         console.log('\n')

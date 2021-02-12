@@ -1,6 +1,6 @@
 {
   "name": "zippydamn",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "ZippyDamn! is a ZippyShare Unofficial CLI (downloader & search) for nodejs",
   "main": "index.js",
   "scripts": {
@@ -19,13 +19,15 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.5",
+    "cli-progress": "^3.8.2",
     "colors": "^1.4.0",
     "commander": "^7.0.0",
+    "dotenv": "^8.2.0",
     "got": "^11.8.1"
   },
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/diosamuel/zippydown"
+    "url": "https://github.com/diosamuel/zippydamn"
   }
 }

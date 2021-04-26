@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 
+const {
+    Command
+} = require('commander')
+const fs = require('fs')
+const color = require('colors')
+const got = require('got')
+const program = new Command();
+
 console.log(`
 ███████╗██╗██████╗ ██████╗ ██╗   ██╗██████╗  █████╗            ███╗   ██╗██╗
 ╚══███╔╝██║██╔══██╗██╔══██╗╚██╗ ██╔╝██╔══██╗██   ██╗████╗ ████║████╗  ██║██║
@@ -7,28 +15,27 @@ console.log(`
  ███╔╝  ██║██╔═══╝ ██╔═══╝   ╚██╔╝  ██║  ██║██   ██║██║╚██╔╝██║██║╚██╗██║╚═╝
 ███████╗██║██║     ██║        ██║   ██████╔╝██   ██║██║ ╚═╝ ██║██║ ╚████║██
 ╚══════╝╚═╝╚═╝     ╚═╝        ╚═╝   ╚═════╝      ╚═╝        ╚═╝  ╚══╝╚═╝    
-by @diosamuel
-`)
+`.brightCyan)
 
-const {
-    Command
-} = require('commander');
-const program = new Command();
 
-const ZippyDamn = {
-    down: require('./src/down'),
-    downloadFile: require('./src/downloadFile'),
-    multi: require('./src/multi'),
-    search: require('./src/search'),
+const zippydamn={
+    extract:require('./src/extract'),
+    extractv2:require('./src/extractv2'),
+    dl:require('./src/downloadFile'),
+    info:require('./src/getInfo'),
+    infov2:require('./src/getInfov2'),
+    expire:require('./src/checkExpires'),
+    search:require('./src/search'),
 }
 
 program
     .name("zippydamn")
     .usage("[global options] command")
+    .option('-key, --key <key>', 'write your google api key here')
     .option('-s, --search <query...>', 'search file on zippyshare')
-    .option('-d, --download <link>', 'just extract url and give you downloadable url')
-    .option('-dl, --downloadFile <link>', 'extract and download the file from url')
-    .option('-m, --multi <source...>', 'just extract multiple url from files');
+    .option('-d, --download <link>', 'only extract url and give you downloadable url')
+    .option('-dl, --downloadFile <link>', 'extract and download file from zippyshare url')
+    // .option('-m, --multi <source...>', 'only extract multiple url from files');
     // .option('-ml, --multiDownload <source...>', 'extracy and download multiple url from files');
 program.addHelpText('after', `
 Example command:
@@ -40,44 +47,70 @@ Example command:
 
 program.parse(process.argv);
 
-const options = program.opts();
+(async ()=>{
 
-if (options.download) {
-    console.log('url : '.brightCyan + options.download)      
-    console.log('------------------------------------')      
-    ZippyDamn.down(options.download, function(result) {
-        console.log('result : '.brightGreen + result)      
-    })
-} else if (options.downloadFile) {
+    const options = program.opts();
+    if (options.download) {
+        console.log('Wait...')
+        let opt = {
+            ext:await zippydamn.extract(options.download),
+            info:await zippydamn.info(options.download),
+        }
 
-    ZippyDamn.search(options.downloadFile, (result) => {
-        ZippyDamn.down(options.downloadFile, (res) => {
-            ZippyDamn.downloadFile("https://" + res, result[0].title)
-        })
-    })
+        let resultUrl = opt.ext.success ? opt.ext : await zippydamn.extractv2(options.download)
+        let infoUrl = opt.info.success ? opt.info : await zippydamn.infov2(options.download)
 
-} else if (options.multi) {
-    ZippyDamn.multi(options.multi[0], options.multi[1])
-} else if (options.search) {
-    ZippyDamn.search(options.search.join(' '), function(res) {
-        console.log(`[>] Search "${options.search.join(' ')}"`.bgBlue)
+        if(!!resultUrl.success){
+            let pesan = `Title : ${infoUrl.title}\n`.cyan
+                pesan += `Size : ${infoUrl.size}\n`.cyan
+                pesan += `Url : \n${resultUrl.msg}\n`.brightCyan
+            console.log(pesan)
+        }else{
+            console.log(resultUrl.msg)
+        }
 
-        if (typeof res != "object") {
-            console.log(res)
-        } else {
-            res.forEach(result => {
+    }else if (options.downloadFile) {
+    
+        let opt = {
+            ext:await zippydamn.extract(options.downloadFile),
+            info:await zippydamn.info(options.downloadFile),
+        }
 
-                console.log('\n', result.id + 1)
-                console.log(' ================================'.rainbow)
-                console.log(` ${result.title}`)
-                console.log(` ${result.link}`.green)
-                console.log(` ${result.desc}`)
-                console.log(' ================================'.rainbow)
+        let resultUrl = opt.ext.success ? opt.ext : await zippydamn.extractv2(options.downloadFile)
+        let infoUrl = opt.info.success ? opt.info : await zippydamn.infov2(options.downloadFile)
 
+        // console.log(resultUrl.msg)
+
+        console.log('[DOWNLOAD]'.cyan)
+        console.log(`Title : ${infoUrl.title}`.brightCyan)
+        console.log(`Size : ${infoUrl.size} \n`.brightCyan)
+        await zippydamn.dl("https://"+resultUrl.msg, infoUrl.title+''+infoUrl.filetype)
+
+    await zippydamn
+    
+    } else if (options.search) {
+        console.log(`[?] Search "${options.search.join(' ')}"`.bgBlue)
+
+        let result = await zippydamn.search(options.search.join(' '))
+
+        if(typeof result!="object"){
+            console.log(result)
+        }else{
+            result.forEach((x,i)=>{
+                let pesan = "=================\n".rainbow
+                    pesan += `Title : ${x.title}\n`
+                    pesan += `Link : ${x.link}\n`
+                    pesan += `Desc : ${x.desc}\n`
+                    pesan += "=================".rainbow                
+                console.log(pesan)
             })
         }
 
-    })
-} else {
-    console.log('type "zippydamn -h" for help')
-}
+
+    
+    } else {
+        console.log('type "zippydamn -h" for help')
+    }
+
+
+})()

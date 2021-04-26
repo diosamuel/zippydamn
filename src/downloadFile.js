@@ -1,16 +1,17 @@
-//DOWNLOAD
+// download file from given link
 const got = require("got");
 const { createWriteStream } = require("fs");
 const cliProgress = require('cli-progress');
 const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 const path = require('path')
+const zippydamn = {
+  info:require('./getInfo')
+}
 
-function downloadFile(url, fileName){
+async function downloadFile(url, fileName){
 
-const downloadStream = got.stream(url);
-const fileWriterStream = createWriteStream(fileName);
-
-console.log(`[DOWNLOAD] ${fileName}...\n`.cyan)
+downloadStream = got.stream(url);
+fileWriterStream = createWriteStream(fileName);
 
 downloadStream
   .on("downloadProgress", ({ transferred, total, percent }) => {
@@ -20,6 +21,7 @@ downloadStream
     bar1.update(transferred)
   })
   .on("error", (error) => {
+    console.error(`[FAIL]`.bgRed);
     console.error(`[FAIL]  ${error.message}`.red);
   })
 
@@ -29,7 +31,8 @@ fileWriterStream
   })
   .on("finish", () => {
     bar1.stop();
-    console.log(`\n[SUCCESS]\n${path.resolve(process.cwd(),fileName)}`.brightCyan)
+    console.log(`\n[SUCCESS]`.bgCyan)
+    console.log(`${path.resolve(process.cwd(),fileName)}`.brightCyan)
 
   });
 

@@ -1,15 +1,13 @@
+//search file name
 const got = require('got');
 const url = require('url');
 const fs = require('fs');
 const colors = require('colors');
 require('dotenv').config()
 
-function search_zippydamn(question,cb) {
+async function search_zippydamn(question,cb) {
 
     let urls = `https://www.googleapis.com/customsearch/v1?key=${process.env.GOOGLE_CSE_KEY}&cx=partner-pub-2958868595034693:9969718365&q=${question}`
-    next = "&start=11"
-    ;(async () => {
-
         try{
         let res = await got(urls)
 
@@ -26,20 +24,20 @@ function search_zippydamn(question,cb) {
                     title:raw.pagemap.metatags[0]["twitter:title"],
                     link:raw.link,
                     desc
-
                 }
                 obj.push(result)
             }
-            cb(obj)
+            return obj
         } else {
-            cb(`Sorry, "${question}" not found!`)
+            return "Try with another keyword!"
         }
     } catch (error) {
-        console.log(error)
-        console.log(JSON.parse(error.response.body).error.message);
-        //=> 'Internal server error ...'
+        if(error.response){
+            return JSON.parse(error.response.body).error.message
+        }else{
+            throw error.message
+        }
     }
-    })()
 
 }
 

@@ -32,7 +32,7 @@ Options:
   -s, --search <query...>     search file on zippyshare
   -d, --download <link>       just extract url and give you downloadable url
   -dl, --downloadFile <link>  extract and download file from url
-  -m, --multi <source...>     just extract multiple url from files
+  -m, --multi <source...>     just extract multiple url from files <-- disabled
   -h, --help                  display help for command
 
 Example command:
@@ -53,12 +53,29 @@ https://www105.zippyshare.com/v/ikVRRh6X/file.html
 | Feature             | Status |
 |---------------------|--------|
 |Extract Link         |  OK    |
-|Multiple Extract Link|  OK    |
+|Multiple Extract Link|  DISABLED    |
 |Search File          |  OK    |
 | Download File       | OK (Beta) |
 | Multiple Download File | PROGRESS |
 
-## UPDATED V0.0.6 !
+# Upcoming Feature
+Zippydamn! Website
+
+please open-source do your magic :)
+
+---
+## UPDATE V0.0.7 !
+### Multi download feature is disabled
+*for next update, this feature will be exist again :)*
+
+### Now you can download & save to local disk without providing CSE API Key
+*but you still using CSE API Key for searching :D*
+
+### Change callback code to async await :D
+Callback is suck you know? >:), so i decided move to async await! :D
+
+---
+## UPDATE V0.0.6 !
 ### ZippyDamn search need a Google CSE API Key to run
 1. Open [https://developers.google.com/custom-search/v1/overview](https://developers.google.com/custom-search/v1/overview)
 2. Click "Get a Key"
@@ -70,8 +87,8 @@ https://www105.zippyshare.com/v/ikVRRh6X/file.html
 
 ### Added a Download feature (beta)
 So you can download and save your zippyshare file to local disk
-*and tiny progress bar :) ~*
 
+*with tiny progress bar :) ~*
 
 ## Contributing <3
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

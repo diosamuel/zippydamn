@@ -6,6 +6,7 @@ const {
 const fs = require('fs')
 const color = require('colors')
 const got = require('got')
+const path = require('path')
 const program = new Command();
 
 console.log(`
@@ -31,10 +32,9 @@ const zippydamn={
 program
     .name("zippydamn")
     .usage("[global options] command")
-    .option('-key, --key <key>', 'write your google api key here')
     .option('-s, --search <query...>', 'search file on zippyshare')
     .option('-d, --download <link>', 'only extract url and give you downloadable url')
-    .option('-dl, --downloadFile <link>', 'extract and download file from zippyshare url')
+    .option('-dl, --downloadFile <link...>', 'extract and download file from zippyshare url')
     // .option('-m, --multi <source...>', 'only extract multiple url from files');
     // .option('-ml, --multiDownload <source...>', 'extracy and download multiple url from files');
 program.addHelpText('after', `
@@ -42,7 +42,7 @@ Example command:
   $ zippydamn -s song
   $ zippydamn -d https://www19.zippyshare.com/v/lKeHaNxX/file.html
   $ zippydamn -m list.txt result.txt
-  $ zippydamn -dl https://www19.zippyshare.com/v/lKeHaNxX/file.html
+  $ zippydamn -dl https://www19.zippyshare.com/v/lKeHaNxX/file.html C:\\Users\\Music
   `);
 
 program.parse(process.argv);
@@ -70,23 +70,25 @@ program.parse(process.argv);
         }
 
     }else if (options.downloadFile) {
-    
         let opt = {
-            ext:await zippydamn.extract(options.downloadFile),
-            info:await zippydamn.info(options.downloadFile),
+            ext:await zippydamn.extract(options.downloadFile[0]),
+            info:await zippydamn.info(options.downloadFile[0]),
         }
 
-        let resultUrl = opt.ext.success ? opt.ext : await zippydamn.extractv2(options.downloadFile)
-        let infoUrl = opt.info.success ? opt.info : await zippydamn.infov2(options.downloadFile)
-
+        let resultUrl = opt.ext.success ? opt.ext : await zippydamn.extractv2(options.downloadFile[0])
+        let infoUrl = opt.info.success ? opt.info : await zippydamn.infov2(options.downloadFile[0])
+        let toPath = options.downloadFile[1]
+        if(toPath){
+            toPath = toPath.endsWith('\\')?toPath:`${toPath}\\`
+        }else{
+            toPath = ''
+        }
         // console.log(resultUrl.msg)
 
         console.log('[DOWNLOAD]'.cyan)
         console.log(`Title : ${infoUrl.title}`.brightCyan)
         console.log(`Size : ${infoUrl.size} \n`.brightCyan)
-        await zippydamn.dl("https://"+resultUrl.msg, infoUrl.title+''+infoUrl.filetype)
-
-    await zippydamn
+        await zippydamn.dl(`https://${resultUrl.msg}`, `${toPath}${infoUrl.title}${infoUrl.filetype}`)
     
     } else if (options.search) {
         console.log(`[?] Search "${options.search.join(' ')}"`.bgBlue)

@@ -10,6 +10,7 @@ const zippydamn = {
 
 async function downloadFile(url, fileName){
 
+console.log(url)
 downloadStream = got.stream(url);
 fileWriterStream = createWriteStream(fileName);
 

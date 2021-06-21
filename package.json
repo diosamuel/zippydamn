@@ -1,6 +1,6 @@
 {
   "name": "zippydamn",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "ZippyDamn! is a ZippyShare Unofficial CLI (downloader & search) for nodejs",
   "main": "index.js",
   "scripts": {

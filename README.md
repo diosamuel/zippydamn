@@ -11,10 +11,9 @@ ZippyDamn! is a ZippyShare Unofficial CLI (downloader & search) for nodejs</h2>
 
 <div align="center">
 <img src="./logo.jpg">
+<img src="https://nodei.co/npm/zippydamn.png">
 </div>
 
-
-![](https://nodei.co/npm/zippydamn.png)
 ## Installation
 
 Use the package manager npm to install _ZippyDamn!_ CLI
@@ -29,32 +28,24 @@ npm install zippydamn -g
 Usage: zippydamn [global options] command
 
 Options:
-  -s, --search <query...>     search file on zippyshare
-  -d, --download <link>       just extract url and give you downloadable url
-  -dl, --downloadFile <link>  extract and download file from url
-  -m, --multi <source...>     just extract multiple url from files <-- disabled
+  -s, --search <query...>     search file on zippyshare.com
+  -d, --download <link>       extract url and give you downloadable link
+  -dl, --downloadFile <link>  extract url, download and save file to local (path is optional)
   -h, --help                  display help for command
 
 Example command:
   $ zippydamn -s song
   $ zippydamn -d https://www19.zippyshare.com/v/lKeHaNxX/file.html
-  $ zippydamn -m list.txt result.txt
   $ zippydamn -dl https://www19.zippyshare.com/v/lKeHaNxX/file.html
-```
-in lists.txt contain lists of zippyshare links
-example : 
-```
-https://www72.zippyshare.com/v/87OpBCJo/file.html
-https://www85.zippyshare.com/v/7my6dgdB/file.html
-https://www80.zippyshare.com/v/xEdvr5wG/file.html
-https://www105.zippyshare.com/v/ikVRRh6X/file.html
+  $ zippydamn -dl https://www19.zippyshare.com/v/lKeHaNxX/file.html C:\Users\Windows\Music
+
 ```
 
 | Feature             | Status |
 |---------------------|--------|
-|Extract Link         |  OK    |
-|Multiple Extract Link|  DISABLED    |
-|Search File          |  OK    |
+| Extract Link         |  OK    |
+| Multiple Extract Link|  DISABLED    |
+| Search File          |  OK    |
 | Download File       | OK (Beta) |
 | Multiple Download File | PROGRESS |
 
@@ -64,6 +55,14 @@ Zippydamn! Website
 please open-source do your magic :)
 
 ---
+## UPDATE V0.0.8 !
+### Added optional path to save files
+```bash
+zippydamn -dl https://www19.zippyshare.com/v/lKeHaNxX/file.html C:\Users\Windows\Music
+```
+
+_File will be saved in C:\Users\Windows\Music_
+
 ## UPDATE V0.0.7 !
 ### Multi download feature is disabled
 *for next update, this feature will be exist again :)*

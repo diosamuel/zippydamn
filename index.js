@@ -35,8 +35,6 @@ program
     .option('-s, --search <query...>', 'search file on zippyshare')
     .option('-d, --download <link>', 'only extract url and give you downloadable url')
     .option('-dl, --downloadFile <link...>', 'extract and download file from zippyshare url')
-    // .option('-m, --multi <source...>', 'only extract multiple url from files');
-    // .option('-ml, --multiDownload <source...>', 'extracy and download multiple url from files');
 program.addHelpText('after', `
 Example command:
   $ zippydamn -s song
@@ -56,7 +54,7 @@ program.parse(process.argv);
             ext:await zippydamn.extract(options.download),
             info:await zippydamn.info(options.download),
         }
-
+ 
         let resultUrl = opt.ext.success ? opt.ext : await zippydamn.extractv2(options.download)
         let infoUrl = opt.info.success ? opt.info : await zippydamn.infov2(options.download)
 
@@ -83,11 +81,13 @@ program.parse(process.argv);
         }else{
             toPath = ''
         }
-        // console.log(resultUrl.msg)
 
         console.log('[DOWNLOAD]'.cyan)
         console.log(`Title : ${infoUrl.title}`.brightCyan)
-        console.log(`Size : ${infoUrl.size} \n`.brightCyan)
+        console.log(`Size : ${infoUrl.size}`.brightCyan)
+        if(toPath){
+            console.log(`Path : ${toPath}`.brightCyan)
+        }
         await zippydamn.dl(`https://${resultUrl.msg}`, `${toPath}${infoUrl.title}${infoUrl.filetype}`)
     
     } else if (options.search) {
@@ -99,11 +99,11 @@ program.parse(process.argv);
             console.log(result)
         }else{
             result.forEach((x,i)=>{
-                let pesan = "=================\n".rainbow
+                let pesan = "\n".rainbow
                     pesan += `Title : ${x.title}\n`
                     pesan += `Link : ${x.link}\n`
                     pesan += `Desc : ${x.desc}\n`
-                    pesan += "=================".rainbow                
+                    pesan += "======================".rainbow                
                 console.log(pesan)
             })
         }

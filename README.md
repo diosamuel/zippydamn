@@ -1,3 +1,7 @@
+<h1 align="center"> END OF SERVICE 😢</center>
+<h1><a href="https://www.zippyshare.com/">Zippyshare</a> has ended its service in March 2023, so this code no longer work again</h1>
+
+---
 <h1 align="center"> ZippyDamn!</h1>
 
 <h2 align="center">
